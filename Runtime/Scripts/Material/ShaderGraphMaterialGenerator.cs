@@ -74,7 +74,7 @@ namespace GLTFast.Materials {
         /// <summary>GUID of the shader graph used for PBR metallic/roughness materials</summary>
         const string k_MetallicShaderGuid = "b9d29dfa1474148e792ac720cbd45122";
         /// <summary>GUID of the shader graph used for unlit materials</summary>
-        const string k_UnlitShaderGuid = "c87047c884d9843f5b0f4cce282aa760";
+        public static string k_UnlitShaderGuid = "c87047c884d9843f5b0f4cce282aa760";
         /// <summary>GUID of the shader graph used for PBR specular/glossiness materials</summary>
         const string k_SpecularShaderGuid = "9a07dad0f3c4e43ff8312e3b5fa42300";
 #endif
@@ -82,7 +82,7 @@ namespace GLTFast.Materials {
         /// <summary>Name of the shader graph used for PBR metallic/roughness materials</summary>
         public const string MetallicShader = "glTF-pbrMetallicRoughness";
         /// <summary>Name of the shader graph used for unlit materials</summary>
-        public const string UnlitShader = "glTF-unlit";
+        public static string UnlitShader = "glTF-unlit";
         /// <summary>Name of the shader graph used for PBR specular/glossiness materials</summary>
         public const string SpecularShader = "glTF-pbrSpecularGlossiness";
 
