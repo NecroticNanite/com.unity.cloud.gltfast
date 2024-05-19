@@ -1974,9 +1974,9 @@ namespace GLTFast.Export
         }
 
         static Node CreateNode(
-            float3? translation = null,
+            double3? translation = null,
             quaternion? rotation = null,
-            float3? scale = null,
+            double3? scale = null,
             string name = null
             )
         {
@@ -1984,7 +1984,7 @@ namespace GLTFast.Export
             {
                 name = name,
             };
-            if (translation.HasValue && !translation.Equals(float3.zero))
+            if (translation.HasValue && !translation.Equals(double3.zero))
             {
                 node.translation = new[] { -translation.Value.x, translation.Value.y, translation.Value.z };
             }
@@ -1992,7 +1992,7 @@ namespace GLTFast.Export
             {
                 node.rotation = new[] { rotation.Value.value.x, -rotation.Value.value.y, -rotation.Value.value.z, rotation.Value.value.w };
             }
-            if (scale.HasValue && !scale.Equals(new float3(1f)))
+            if (scale.HasValue && !scale.Equals(new double3(1f)))
             {
                 node.scale = new[] { scale.Value.x, scale.Value.y, scale.Value.z };
             }

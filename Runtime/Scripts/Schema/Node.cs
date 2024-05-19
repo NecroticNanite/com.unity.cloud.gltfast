@@ -47,7 +47,7 @@ namespace GLTFast.Schema
         /// <summary>
         /// A floating-point 4x4 transformation matrix stored in column-major order.
         /// </summary>
-        public float[] matrix;
+        public double[] matrix;
 
         /// <summary>
         /// The node's unit quaternion rotation in the order (x, y, z, w),
@@ -58,12 +58,12 @@ namespace GLTFast.Schema
         /// <summary>
         /// The node's non-uniform scale.
         /// </summary>
-        public float[] scale;
+        public double[] scale;
 
         /// <summary>
         /// The node's translation.
         /// </summary>
-        public float[] translation;
+        public double[] translation;
 
         // /// <summary>
         // /// The weights of the instantiated Morph Target.

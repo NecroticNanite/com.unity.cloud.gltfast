@@ -650,13 +650,14 @@ namespace GLTFast
         public async Task<bool> InstantiateSceneAsync(
             Transform parent,
             int sceneIndex = 0,
-            CancellationToken cancellationToken = default
+            CancellationToken cancellationToken = default,
+            double3? translation = null
             )
         {
             if (!LoadingDone || LoadingError) return false;
             if (sceneIndex < 0 || sceneIndex > Root.Scenes.Count) return false;
             var instantiator = new GameObjectInstantiator(this, parent);
-            var success = await InstantiateSceneAsync(instantiator, sceneIndex, cancellationToken);
+            var success = await InstantiateSceneAsync(instantiator, sceneIndex, cancellationToken, translation);
             return success;
         }
 
@@ -672,12 +673,13 @@ namespace GLTFast
         public async Task<bool> InstantiateSceneAsync(
             IInstantiator instantiator,
             int sceneIndex = 0,
-            CancellationToken cancellationToken = default
+            CancellationToken cancellationToken = default,
+            double3? translation = null
             )
         {
             if (!LoadingDone || LoadingError) return false;
             if (sceneIndex < 0 || sceneIndex > Root.Scenes.Count) return false;
-            await InstantiateSceneInternal(Root, instantiator, sceneIndex);
+            await InstantiateSceneInternal(Root, instantiator, sceneIndex, translation);
             return true;
         }
 
@@ -2423,7 +2425,8 @@ namespace GLTFast
 #endif
         }
 
-        async Task InstantiateSceneInternal(RootBase gltf, IInstantiator instantiator, int sceneId)
+        async Task InstantiateSceneInternal(RootBase gltf, IInstantiator instantiator, int sceneId, 
+        double3? translation)
         {
             if (m_ImportInstances != null)
             {
@@ -2449,11 +2452,11 @@ namespace GLTFast
 
             void CreateHierarchy(uint nodeIndex, uint? parentIndex)
             {
-
                 Profiler.BeginSample("CreateHierarchy");
                 var node = Root.Nodes[(int)nodeIndex];
                 node.GetTransform(out var position, out var rotation, out var scale);
-                instantiator.CreateNode(nodeIndex, parentIndex, position, rotation, scale);
+                var modified = position + translation.GetValueOrDefault(double3.zero);
+                instantiator.CreateNode(nodeIndex, parentIndex, (float3)modified, rotation, scale);
                 Profiler.EndSample();
             }
 
